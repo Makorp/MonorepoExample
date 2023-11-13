@@ -2,5 +2,5 @@
 
 public interface IService
 {
-    void DoSomething(string stringParam, int intParam);
+    void DoSomething(string stringParam);
 }
