@@ -2,7 +2,7 @@ name: ProjectC build
 
 on: 
   workflow_run:
-    workflows: [ProjectA]
+    workflows: [ProjectA build]
     types:
       - completed
     branches: [ "**" ]
