@@ -11,6 +11,5 @@ public class ClassC
 
     public void DoSomething(string stringParam, int intParam)
     {
-        throw new NotImplementedException();
     }
 }
