@@ -6,22 +6,13 @@ on:
     types:
       - completed
     branches: [ "**" ]
-    paths:
-      - 'src/ProjectA/ref/**'
-      - 'src/ProjectC/src/**'
-
-  pull_request:
-    branches: [ "**" ]
-    paths:
-      - 'src/ProjectA/ref/**'
-      - 'src/ProjectC/src/**'
 
 defaults:
   run:
     working-directory: ./
 
 jobs:
-  build:
+  on-success:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -33,3 +24,8 @@ jobs:
       run: dotnet restore 'src/ProjectC/src/ProjectC.csproj'
     - name: Build
       run: dotnet build 'src/ProjectC/src/ProjectC.csproj'
+  on-failure:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    steps:
+      - run: echo 'The triggering workflow failed'
