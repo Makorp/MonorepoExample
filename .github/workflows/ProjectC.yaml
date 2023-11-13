@@ -4,14 +4,14 @@ on:
   push:
     branches: [ "**" ]
     paths:
-      - 'src/ProjectA/src/**'
-      - 'src/ProjectB/src/**'
+      - 'src/ProjectA/ref/**'
+      - 'src/ProjectC/src/**'
 
   pull_request:
     branches: [ "**" ]
     paths:
-      - 'src/ProjectA/src/**'
-      - 'src/ProjectB/src/**'
+      - 'src/ProjectA/ref/**'
+      - 'src/ProjectC/src/**'
 
 defaults:
   run:
