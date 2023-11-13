@@ -4,12 +4,12 @@ on:
   push:
     branches: [ "**" ]
     paths:
-      - ./src/ProjectA/src/**
+      - './src/ProjectA/src/**'
 
   pull_request:
     branches: [ "**" ]
     paths:
-      - ./src/ProjectA/src/**
+      - './src/ProjectA/src/**'
 
 jobs:
   build:
@@ -23,6 +23,6 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build ./src/ProjectA/src/ProjectA.csproj
+      run: dotnet build './src/ProjectA/src/ProjectA.csproj'
     - name: Publish to folder
-      run: dotnet publish ./src/ProjectA/src/ProjectA.csproj --configuration RELEASE --no-build --output ./src/ProjectA/ref
+      run: dotnet publish './src/ProjectA/src/ProjectA.csproj' --configuration RELEASE --no-build --output './src/ProjectA/ref'
