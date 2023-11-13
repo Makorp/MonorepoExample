@@ -29,4 +29,4 @@ jobs:
     - name: Build
       run: dotnet build 'src/ProjectA/src/ProjectA.csproj'
     - name: Publish to folder
-      run: dotnet publish 'src/ProjectA/src/ProjectA.csproj' --configuration Release --no-build --output 'src/ProjectA/ref'
+      run: dotnet publish 'src/ProjectA/src/ProjectA.csproj' --configuration Release --output 'src/ProjectA/ref'
