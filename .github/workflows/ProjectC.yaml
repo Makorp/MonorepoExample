@@ -8,6 +8,16 @@ on:
       - completed
     branches: [ "**" ]
 
+  push:
+    branches: [ "**" ]
+    paths:
+      - 'src/ProjectC/src/**'
+
+  pull_request:
+    branches: [ "**" ]
+    paths:
+      - 'src/ProjectC/src/**'
+
 defaults:
   run:
     working-directory: ./
