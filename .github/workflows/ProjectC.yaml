@@ -1,7 +1,10 @@
 name: ProjectC build
 
 on: 
-  push:
+  workflow_run:
+    workflows: [ProjectA]
+    types:
+      - completed
     branches: [ "**" ]
     paths:
       - 'src/ProjectA/ref/**'
