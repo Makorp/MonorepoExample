@@ -8,9 +8,4 @@ public sealed class ServiceB
     public void DoSomething(string param)
     {
     }
-
-    public void DoSomething(string stringParam, int intParam)
-    {
-        throw new NotImplementedException();
-    }
 }
