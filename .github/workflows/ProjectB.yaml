@@ -25,4 +25,4 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: run: dotnet build ./src/ProjectB/src/ProjectB.csproj
+      run: dotnet build ./src/ProjectB/src/ProjectB.csproj
