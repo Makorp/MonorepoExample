@@ -4,14 +4,14 @@ on:
   push:
     branches: [ "**" ]
     paths:
-      - './src/ProjectA/src/**'
-      - './src/ProjectB/src/**'
+      - 'src/ProjectA/src/**'
+      - 'src/ProjectB/src/**'
 
   pull_request:
     branches: [ "**" ]
     paths:
-      - './src/ProjectA/src/**'
-      - './src/ProjectB/src/**'
+      - 'src/ProjectA/src/**'
+      - 'src/ProjectB/src/**'
 
 jobs:
   build:
@@ -25,4 +25,4 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build './src/ProjectB/src/ProjectB.csproj'
+      run: dotnet build 'src/ProjectB/src/ProjectB.csproj'
