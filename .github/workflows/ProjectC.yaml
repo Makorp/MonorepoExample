@@ -27,6 +27,6 @@ jobs:
       with: 
         dotnet-version: 7.0.x
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore 'src/ProjectC/src/ProjectC.csproj'
     - name: Build
       run: dotnet build 'src/ProjectC/src/ProjectC.csproj'
