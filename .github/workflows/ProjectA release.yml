@@ -9,7 +9,7 @@ defaults:
     working-directory: ./src/ProjectA
 
 jobs:
-  pack and publish:
+  pack-and-publish:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -17,6 +17,18 @@ jobs:
       uses: actions/setup-dotnet@v3
       with: 
         dotnet-version: 7.0.x
+    - name: Get version
+      id: get_version
+      run: echo ::set-output name=version::${GITHUB_REF#refs/*/}
+    - name: Get commit hash
+      id: get_commit_hash
+      run: echo ::set-output name=commit_hash::${GITHUB_SHA::8}
+    - name: Get tag by ref
+      id: get_tag_ref
+      run: echo ::set-output name=tag::${GITHUB_REF#refs/tags/}
+    - name: Get tag from release
+      id: get_tag_release
+      run: echo ::set-output name=tag::${{ github.event.release.tag_name }}
     - name: Restore project dependencies
       run: dotnet restore '/src/ProjectA.csproj'
     - name: Build project
