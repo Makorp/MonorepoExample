@@ -6,6 +6,7 @@ on:
       project:
         description: 'Project to release'
         required: true
+        type: choice
         options:
         - ezdomain.eventsourcing
         - ezdomain.core
