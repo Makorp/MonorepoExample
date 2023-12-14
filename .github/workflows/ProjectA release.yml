@@ -36,7 +36,7 @@ jobs:
         {
           $response = Invoke-RestMethod -Uri https://api.nuget.org/v3-flatcontainer/${{ github.event.inputs.project }}/index.json -Method Get
           $env:VERSION = $response.versions[-1]
-          echo $env:VERSION
+          echo "NuGet package latest version: $env:VERSION"
         }
         catch
         {
