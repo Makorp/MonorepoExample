@@ -50,4 +50,4 @@ jobs:
       run: dotnet build 'src/ProjectA/ProjectA.csproj' --configuration Release  --no-restore
     - name: Pack project
       run: |
-        dotnet pack 'src/ProjectA/ProjectA.csproj' --configuration Release --output '.nuget/'
+        dotnet pack 'src/ProjectA/ProjectA.csproj' --configuration Release --output .nuget/ -p:PackageVersion=${{ steps.step_id.outputs.LATEST_VERSION }}
