@@ -44,9 +44,9 @@ jobs:
         $LATEST_VERSION = (Invoke-RestMethod -Uri 'https://api.nuget.org/v3-flatcontainer/ezdomain.eventsourcing/index.json').versions[-1]
         echo $LATEST_VERSION >> $GITHUB_OUTPUT
     - name: Restore project dependencies
-      run: dotnet restore './src/ProjectA.csproj'
+      run: dotnet restore './src/ProjectA/ProjectA.csproj'
     - name: Build project
-      run: dotnet build './src/ProjectA.csproj' --configuration Release  --no-restore
+      run: dotnet build './src/ProjectA/ProjectA.csproj' --configuration Release  --no-restore
     - name: Pack project
       run: |
-        dotnet pack './src/ProjectA.csproj' --configuration Release --output './.nuget/'
+        dotnet pack './src/ProjectA/ProjectA.csproj' --configuration Release --output './.nuget/'
