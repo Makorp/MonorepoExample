@@ -27,7 +27,7 @@ jobs:
       run: |
         try
         {
-          $response = Invoke-RestMethod -Uri 'https://api.nuget.org/v3-flatcontainer/ezdomain.eventsourcing/index.json' -Method Get
+          $response = Invoke-RestMethod -Uri https://api.nuget.org/v3-flatcontainer/ezdomain.eventsourcing/index.json -Method Get
           ${{ env.VERSION }} = $response.versions[-1]
           echo ${{ env.VERSION }}
         }
