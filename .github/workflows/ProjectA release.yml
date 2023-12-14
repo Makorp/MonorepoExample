@@ -33,6 +33,7 @@ jobs:
         }
     - name: Get latest version
       id: latest_version
+      shell: pwsh
       run: |
         $LATEST_VERSION = (Invoke-RestMethod -Uri 'https://api.nuget.org/v3-flatcontainer/ezdomain.eventsourcing/index.json').versions[-1]
         echo "::set-output name=LATEST_VERSION::$LATEST_VERSION"
