@@ -21,6 +21,7 @@ jobs:
       with: 
         dotnet-version: 7.0.x
     - name: Check if package exists
+      shell: pwsh
       run: |
         $response = Invoke-RestMethod -Uri 'https://api.nuget.org/v3-flatcontainer/ezdomain.eventsourcing/index.json' -Method Get -ErrorAction SilentlyContinue
         if ($null -eq $response) {
