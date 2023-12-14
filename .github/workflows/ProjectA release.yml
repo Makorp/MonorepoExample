@@ -11,8 +11,17 @@ on:
         - ezdomain.eventsourcing
         - ezdomain.core
         default: ezdomain.eventsourcing
+      versionType:
+        description: 'Version type'
+        required: true
+        type: choice
+        options:
+        - major
+        - minor
+        - patch
+        default: patch
       version:
-        description: 'Version'
+        description: 'Initial package version (e.g. 1.0.0)'
         required: false
 
 defaults:
