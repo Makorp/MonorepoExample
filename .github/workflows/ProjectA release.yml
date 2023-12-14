@@ -1,4 +1,4 @@
-name: ProjectA build
+name: ProjectA rlease
 
 on: 
   release:
