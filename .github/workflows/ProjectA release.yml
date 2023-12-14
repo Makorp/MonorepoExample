@@ -3,6 +3,13 @@ name: ProjectA release
 on:
   workflow_dispatch:
     inputs:
+      project:
+        description: 'Project to release'
+        required: true
+        options:
+        - ezdomain.eventsourcing
+        - ezdomain.core
+        default: ezdomain.eventsourcing
       version:
         description: 'Version'
         required: false
@@ -25,9 +32,6 @@ jobs:
     - name: Check if package exists
       shell: pwsh
       run: |
-        $response = Invoke-RestMethod -Uri https://api.nuget.org/v3-flatcontainer/ezdomain.eventsourcing/index.json -Method Get
-        $env:VERSION = $response.versions[-1]
-        echo $env:VERSION
         try
         {
           $response = Invoke-RestMethod -Uri https://api.nuget.org/v3-flatcontainer/ezdomain.eventsourcing/index.json -Method Get
