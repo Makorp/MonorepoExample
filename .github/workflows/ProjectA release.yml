@@ -25,18 +25,18 @@ jobs:
       run: |
         try {
           $response = Invoke-RestMethod -Uri 'https://api.nuget.org/v3-flatcontainer/ezdomain.eventsourcing123/index.json' -Method Get -ErrorAction Stop
-        }
-        catch {
-          $response = $null
-        }
-        if ($null -eq $response) {
-          if ("${{ github.event.inputs.version }}" -eq "") {
+          if ($null -eq $response && "${{ github.event.inputs.version }}" -eq "") {
             echo "Package does not exist on NuGet and no version input provided"
             exit 1
           }
-          echo "NEW_VERSION=${{ github.event.inputs.version }}" >> $GITHUB_ENV
+          else {
+            echo "NEW_VERSION=${{ github.event.inputs.version }}" >> $GITHUB_ENV
+          }
         }
-        echo "Package exists on NuGet"
+        catch {
+          echo "Package does not exist on NuGet and no version input provided"
+          exit 1
+        }
     - name: Get latest version
       id: latest_version
       shell: pwsh
