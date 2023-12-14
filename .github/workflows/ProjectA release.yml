@@ -25,6 +25,9 @@ jobs:
     - name: Check if package exists
       shell: pwsh
       run: |
+        $response = Invoke-RestMethod -Uri https://api.nuget.org/v3-flatcontainer/ezdomain.eventsourcing/index.json -Method Get
+        ${{ env.VERSION }} = $response.versions[-1]
+        echo ${{ env.VERSION }}
         try
         {
           $response = Invoke-RestMethod -Uri https://api.nuget.org/v3-flatcontainer/ezdomain.eventsourcing/index.json -Method Get
