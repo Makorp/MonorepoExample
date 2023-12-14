@@ -23,7 +23,7 @@ jobs:
     - name: Check if package exists
       shell: pwsh
       run: |
-        $response = Invoke-RestMethod -Uri 'https://api.nuget.org/v3-flatcontainer/ezdomain.eventsourcing123/index.json' -Method Get -ErrorAction SilentlyContinue
+        $response = Invoke-RestMethod -Uri 'https://api.nuget.org/v3-flatcontainer/ezdomain.eventsourcing123/index.json' -Method Get -ErrorAction SilentlyContinue  -ErrorVariable MyError
         if ($response -eq $null)
         {
           if ("${{ github.event.inputs.version }}" -eq "")
