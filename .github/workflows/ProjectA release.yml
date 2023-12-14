@@ -59,4 +59,4 @@ jobs:
     - name: Pack project
       shell: pwsh
       run: |
-        dotnet pack 'src/ProjectA/ProjectA.csproj' --configuration Release --output .nuget/ -p:PackageVersion=$env:.VERSION --no-restore
+        dotnet pack 'src/ProjectA/ProjectA.csproj' --configuration Release --output .nuget/ -p:PackageVersion=$env:VERSION --no-restore
