@@ -23,19 +23,22 @@ jobs:
     - name: Check if package exists
       shell: pwsh
       run: |
-        try {
-          $response = Invoke-RestMethod -Uri 'https://api.nuget.org/v3-flatcontainer/ezdomain.eventsourcing123/index.json' -Method Get -ErrorAction Stop
-          if ($null -eq $response && "${{ github.event.inputs.version }}" -eq "") {
+        $response = Invoke-RestMethod -Uri 'https://api.nuget.org/v3-flatcontainer/ezdomain.eventsourcing123/index.json' -Method Get -ErrorAction SilentlyContinue
+        if ($response -eq $null)
+        {
+          if ("${{ github.event.inputs.version }}" -eq "")
+          {
             echo "Package does not exist on NuGet and no version input provided"
             exit 1
           }
           else {
             echo "NEW_VERSION=${{ github.event.inputs.version }}" >> $GITHUB_ENV
+            echo "NEW_VERSION=${{ github.event.inputs.version }}"
           }
         }
-        catch {
-          echo "Package does not exist on NuGet and no version input provided"
-          exit 1
+        else
+        {
+          echo "Package exists on NuGet"
         }
     - name: Get latest version
       id: latest_version
