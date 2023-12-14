@@ -14,6 +14,8 @@ defaults:
 jobs:
   pack-and-publish:
     runs-on: ubuntu-latest
+    env:
+      VERSION: ${{ github.event.inputs.version }}
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET 7
@@ -23,34 +25,20 @@ jobs:
     - name: Check if package exists
       shell: pwsh
       run: |
-        $response = Invoke-RestMethod -Uri 'https://api.nuget.org/v3-flatcontainer/ezdomain.eventsourcing123/index.json' -Method Get -ErrorAction SilentlyContinue  -ErrorVariable MyError
-        if ($response -eq $null)
+        try
         {
-          if ("${{ github.event.inputs.version }}" -eq "")
-          {
-            echo "Package does not exist on NuGet and no version input provided"
-            exit 1
-          }
-          else {
-            echo "NEW_VERSION=${{ github.event.inputs.version }}" >> $GITHUB_ENV
-            echo "NEW_VERSION=${{ github.event.inputs.version }}"
-          }
+          $response = Invoke-RestMethod -Uri 'https://api.nuget.org/v3-flatcontainer/ezdomain.eventsourcing123/index.json' -Method Get
+          ${{ env.VERSION }} = $response.versions[-1]
+          echo ${{ env.VERSION }}
         }
-        else
+        catch
         {
-          echo "Package exists on NuGet"
+          echo "Package was not found in NuGet."
         }
-    - name: Get latest version
-      id: latest_version
-      shell: pwsh
-      run: |
-        $LATEST_VERSION = (Invoke-RestMethod -Uri 'https://api.nuget.org/v3-flatcontainer/ezdomain.eventsourcing/index.json').versions[-1]
-        echo "LATEST_VERSION=$LATEST_VERSION"
-        echo $LATEST_VERSION >> $GITHUB_OUTPUT
     - name: Restore project dependencies
       run: dotnet restore 'src/ProjectA/ProjectA.csproj'
     - name: Build project
       run: dotnet build 'src/ProjectA/ProjectA.csproj' --configuration Release  --no-restore
     - name: Pack project
       run: |
-        dotnet pack 'src/ProjectA/ProjectA.csproj' --configuration Release --output .nuget/ -p:PackageVersion=${{ steps.step_id.outputs.LATEST_VERSION }}
+        dotnet pack 'src/ProjectA/ProjectA.csproj' --configuration Release --output .nuget/

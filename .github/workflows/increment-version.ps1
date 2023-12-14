@@ -1,4 +1,4 @@
-param([string]$projectPath)
+param([string]$projectPath, [string]$version])
 
 $xml = [xml](Get-Content $projectPath)
 $version = $xml.Project.PropertyGroup.Version
